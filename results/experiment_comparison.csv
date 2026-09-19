@@ -1,0 +1,3 @@
+Experiment,Test Accuracy,Test Precision,Test Recall,Test F1,Test ROC-AUC,CDR Accuracy,CDR Macro-F1,Selected Threshold,Avg DEQ Iters,Non-converged Solves
+Baseline Unweighted DEQ,0.5833,0.0,0.0,0.0,0.6222,0.5833,0.2456,0.5,9.0,0
+Class-Weighted DEQ,0.4166666666666667,0.4166666666666667,1.0,0.5882352941176471,0.4952380952380953,0.5833333333333334,0.24561403508771928,0.5,9.0,0

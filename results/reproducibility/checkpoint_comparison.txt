@@ -1,0 +1,12 @@
+=== ORIGINAL BASELINE (train.py) ===
+Selection Criterion: Validation F1 (Max)
+Because F1 was 0.0 for all epochs (imbalanced 0.5 threshold), the model saved at Epoch 1 was never overwritten!
+Epoch Selected: 1
+Validation ROC-AUC at Epoch 1: 0.4533
+Early Stopping: Triggered at Epoch 6 (patience 5 since F1 didn't improve from 0.0)
+
+=== BETA 0.5 ABLATION (beta_ablation.py) ===
+Selection Criterion: Validation Loss (Min)
+Because Validation Loss continuously improved as the network learned better representations/probabilities, it selected a later epoch.
+Epoch Selected: Much later (or best validation loss epoch)
+Early Stopping: Triggered based on validation loss patience

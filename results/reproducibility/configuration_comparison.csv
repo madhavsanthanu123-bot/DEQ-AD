@@ -1,0 +1,35 @@
+parameter,original_baseline,beta_0.5_ablation,identical
+Random seed,42,42,True
+Python random seed,random.seed(seed),Not used,False
+NumPy seed,np.random.seed(seed),np.random.seed(seed),True
+PyTorch CPU seed,torch.manual_seed(seed),torch.manual_seed(seed),True
+PyTorch CUDA seed,torch.cuda.manual_seed_all(seed),torch.cuda.manual_seed_all(seed),True
+DataLoader generator,Default,Default,True
+DataLoader shuffle behavior,"Train=True, Val/Test=False","Train=True, Val/Test=False",True
+train/validation/test subject IDs,Same CSVs,Same CSVs,True
+model initialization,Default PyTorch init,Default PyTorch init,True
+optimizer initialization,"AdamW(lr=1e-4, wd=1e-4)","AdamW(lr=1e-4, wd=1e-4)",True
+learning rate,1e-4,1e-4,True
+weight decay,1e-4,1e-4,True
+batch size,2,2,True
+maximum epochs,20,20,True
+early stopping patience,5,5,True
+checkpoint selection criterion,Validation F1 (Max),Validation Loss (Min),False
+scheduler,"ReduceLROnPlateau(val_loss, patience=3, factor=0.5)","ReduceLROnPlateau(val_loss, patience=3, factor=0.5)",True
+CDR loss weighting,0.5 * CrossEntropyLoss,0.5 * CrossEntropyLoss,True
+BCE loss configuration,BCEWithLogitsLoss(),BCEWithLogitsLoss(),True
+preprocessing,Same preprocessing.py,Same preprocessing.py,True
+MRI normalization,Z-score on brain mask,Z-score on brain mask,True
+MRI resizing,"(96, 112, 96)","(96, 112, 96)",True
+model beta,0.5 (hardcoded),0.5 (passed in),True
+DEQ tolerance,1e-5,1e-5,True
+DEQ max iterations,50,50,True
+DEQ spectral normalization,Yes,Yes,True
+model architecture,DEQADModel,DEQADModel,True
+training/evaluation mode,model.train() / model.eval(),model.train() / model.eval(),True
+thresholding,0.5,0.5,True
+checkpoint loading,best_model.pt,best_model.pt,True
+any accidental test-set usage,None,None,True
+any differences in class labels,None,None,True
+any differences in loss averaging,None,None,True
+any differences in validation metric calculation,safe_metrics,"None, calculated explicitly",True

@@ -1,0 +1,24 @@
+{
+    "dataset": {
+        "total_subjects": 235,
+        "train_subjects": 164,
+        "val_subjects": 35,
+        "test_subjects": 36
+    },
+    "representation": {
+        "feature_dimensionality": 64,
+        "mean_feature_std": 0.001726172980852425,
+        "collapsed_dimensions_pct_1e3": 1.5625,
+        "collapsed_dimensions_pct_1e2": 100.0,
+        "average_pairwise_distance": 0.01940365599350836,
+        "pca_explained_variance_ratio": [
+            0.32011353969573975,
+            0.15459272265434265
+        ],
+        "conclusion": "Evidence of feature collapse"
+    },
+    "deq_performance": {
+        "average_iterations": 9.0,
+        "non_converged_count": 0
+    }
+}

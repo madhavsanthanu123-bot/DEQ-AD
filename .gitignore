@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+deq-ad-env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# OASIS / MRI data
+*.img
+*.hdr
+*.nii
+*.nii.gz
+*.tar
+*.tar.gz
+
+# Dataset directories
+data/raw/
+data/oasis/
+OASIS-1/
+oasis_data/
+
+# Large model files
+*.pt
+*.pth
+*.ckpt
+checkpoints/*.pt
+checkpoints/*.pth
+
+# Temporary files
+*.tmp
+*.log
+
+# Local environment/config
+.env
+
+# Generated caches
+.cache/

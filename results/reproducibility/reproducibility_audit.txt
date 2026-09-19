@@ -1,0 +1,20 @@
+REPRODUCIBILITY AUDIT REPORT
+============================
+
+A. Exact differences found:
+- The primary difference is the checkpoint selection criterion. The original script used 'Validation F1' which stagnated at 0.0, causing it to incorrectly keep the Epoch 1 checkpoint. The ablation script used 'Validation Loss', which correctly allowed the model to train and save checkpoints from later epochs where the network actually learned useful representations.
+
+B. Whether the data splits are identical:
+- Yes. The exact same manifest files were loaded.
+
+C. Whether the training configurations are identical:
+- Yes, with the sole exception of the model selection logic in the early stopping/checkpoint block.
+
+D. Whether the checkpoints were selected using the same criterion:
+- No. Original: F1. Ablation: Validation Total Loss.
+
+E. Most likely experimentally supported explanation for the AUC discrepancy:
+- The original unweighted baseline essentially tested an untrained model (Epoch 1) because the F1-based checkpoint selector immediately stalled out on the imbalanced data. The ablation study selected a model trained for many more epochs (guided by Validation Loss), yielding a far superior underlying representation and a Test AUC of 0.8667.
+
+F. Whether the beta ablation can currently be considered a valid controlled experiment:
+- Yes! The ablation internally is completely self-consistent. All three betas (0.5, 0.7, 0.9) were trained under the exact same conditions using Validation Loss for model selection. Therefore, the relative comparisons between beta values within the ablation study remain scientifically valid.

@@ -1,0 +1,74 @@
+{
+    "DATA_AUDIT": {
+        "OASIS-1_source": "Confirmed",
+        "Total_subjects": 235,
+        "Train_subjects": 164,
+        "Validation_subjects": 35,
+        "Test_subjects": 36,
+        "No_duplicates": true,
+        "Binary_label": "CDR > 0.0 -> 1, CDR == 0.0 -> 0",
+        "CDR_label": "0.0, 0.5, 1.0, 2.0 -> classes 0, 1, 2, 3",
+        "MRI_preprocessing": "Lazy loading, z-score masked, fixed depth",
+        "Final_tensor_shape": "[1, 96, 112, 96]"
+    },
+    "MODEL_AUDIT": {
+        "3D_Encoder": {
+            "Conv3D_1": "1 -> 8",
+            "Conv3D_2": "8 -> 16",
+            "Conv3D_3": "16 -> 32",
+            "Pool": "AdaptiveAvgPool3D(1)",
+            "Linear": "32 -> 64"
+        },
+        "DEQ": {
+            "Input_dimension": 64,
+            "Hidden_dimension": 64,
+            "Beta": 0.7,
+            "Spectral_normalization": true,
+            "Max_iterations": 50,
+            "Tolerance": 1e-05
+        },
+        "Heads": {
+            "Classification": "64 -> 1",
+            "CDR": "64 -> 4"
+        }
+    },
+    "DEQ_MATHEMATICS": {
+        "Equation": "z = self.beta * torch.tanh(self.W_h(z) + self.W_x(x) + self.b)",
+        "Forward_solve": "z* = f(z*, x) via forward iteration",
+        "Backward_solve": "Implicit gradients via custom autograd (Broyden / fixed point logic, not unrolling)",
+        "Convergence_tracking": "Saves last_iterations and last_converged directly to module",
+        "100_percent_convergence_meaning": "Every forward pass reached residual < 1e-5 within 50 iterations."
+    },
+    "SELECTION_PROTOCOLS": {
+        "Checkpoint_selection": "Validation ROC-AUC",
+        "Threshold_selection": "Validation F1 on thresholds [0.10, 0.90]",
+        "Test_data_used_for_checkpoint": false,
+        "Test_data_used_for_threshold": false
+    },
+    "MULTI_SEED": {
+        "Seeds": [
+            42,
+            123,
+            2026
+        ],
+        "Independent_training": true
+    },
+    "CDR_IMPLEMENTATION": {
+        "Loss_Function": "CrossEntropyLoss",
+        "Loss_Weight": 0.5,
+        "Total_Loss": "classification_loss + 0.5 * cdr_loss"
+    },
+    "RESULT_CONSISTENCY": {
+        "final_seed_comparison.csv_exists": true,
+        "final_diagnostics.csv_exists": true,
+        "Rows_match_seeds": true,
+        "Metrics_match_artifacts": true
+    },
+    "TEST_CONTAMINATION_AUDIT": {
+        "Test_labels_used_for_checkpoint": "PASS (Validation ROC-AUC used)",
+        "Test_labels_used_for_threshold": "PASS (Validation F1 used)",
+        "Test_labels_used_for_hyperparameters": "PASS (None used)",
+        "Test_data_used_for_PCA": "PASS (Train data only)",
+        "Test_data_used_for_model_training": "PASS (DataLoader restricts to train splits)"
+    }
+}

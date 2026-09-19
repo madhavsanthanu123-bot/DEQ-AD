@@ -1,0 +1,4 @@
+Split,Subject Count,Control,Impaired
+Train,164,94,70
+Validation,35,20,15
+Test,36,21,15
